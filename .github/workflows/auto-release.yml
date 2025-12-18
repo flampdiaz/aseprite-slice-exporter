@@ -1,0 +1,49 @@
+name: Auto Version + Release
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # Evita loop infinito: no corre cuando el push lo hace el bot
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version (patch) and create tag
+        id: bump
+        run: |
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $NEW_VERSION"
+
+          npm version patch -m "chore(release): v%s [skip ci]"
+
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Push commit and tags
+        run: |
+          git push origin main
+          git push origin --tags
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump.outputs.tag }}
+          name: ${{ steps.bump.outputs.tag }}
+          generate_release_notes: true
