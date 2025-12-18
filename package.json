@@ -2,7 +2,7 @@
     "name": "export-slices-as-png",
     "displayName": "Export Slices as PNG",
     "description": "Export each Slice as a separate PNG named after the Slice.",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "you",
     "categories": [
         "Scripts"
