@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   release:
-    # Evita loop infinito: no corre cuando el push lo hace el bot
+    # Avoid infinite loops: it doesn't run when the push is made by the bot.
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
@@ -43,14 +43,17 @@ jobs:
 
       - name: Create clean extension ZIP
         run: |
-          mkdir release
+          OUTDIR="/tmp/release"
+          mkdir -p "$OUTDIR/aseprite-slice-exporter"
+          
           rsync -av \
             --exclude='.github' \
             --exclude='.git' \
             --exclude='.gitignore' \
-            ./ release/aseprite-slice-exporter
-          cd release
-          zip -r aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip aseprite-slice-exporter
+            --exclude='.gitattributes' \
+            ./ "$OUTDIR/aseprite-slice-exporter"
+          cd "$OUTDIR"
+          zip -r "aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip" "aseprite-slice-exporter"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -74,5 +77,5 @@ jobs:
             **License**
             GPLv3 — modifications must remain open-source and credit is required.
           files: |
-            release/aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip
+            /tmp/release/aseprite-slice-exporter-${{ steps.bump.outputs.tag }}.zip
           generate_release_notes: true
