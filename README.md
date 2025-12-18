@@ -48,9 +48,38 @@ Each slice will be exported as an individual PNG.
 
 ## How It Works
 
-The extension renders the active sprite frame into memory, crops each slice using its bounds, and saves each slice as a PNG using the slice name.
+The extension renders the active sprite frame into memory, crops each slice using its bounds, and saves each slice as an individual PNG file using the slice name.
 
-Because some Aseprite builds do not provide a native folder picker for scripts, the export dialog asks you to select **any file inside the target folder**. The extension automatically exports the PNG files into that folder.
+All visible layers are flattened exactly as they appear on the canvas. Only the currently active frame is used during export.
+
+Because some Aseprite builds do not provide a native folder picker for scripts, the export dialog asks you to select **any file inside the target folder**. The extension automatically detects the folder and exports the PNG files directly into it.
+
+---
+
+## What This Tool Is For
+
+Use this extension when you have multiple assets in a single canvas (icons, tiles, UI pieces, shapes, etc.), and you want to export each asset as a separate PNG using slices.
+
+This is ideal for workflows where you want standalone PNG files instead of a spritesheet.
+
+---
+
+## What It Does Not Do
+
+To avoid confusion:
+
+- It does **not** generate spritesheets
+- It does **not** export animations
+- It does **not** export every frame automatically
+- It does **not** export layers as separate files
+
+If you need spritesheets or animation exports, Aseprite’s built-in exporters are a better fit.
+
+---
+
+## Tested Scenario
+
+Tested with a single canvas containing multiple distinct assets, each marked with a named slice. For example, a slice named `Triangle_Outline` is exported as `Triangle_Outline.png` (one PNG per slice).
 
 ---
 
