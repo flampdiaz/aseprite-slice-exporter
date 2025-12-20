@@ -81,6 +81,17 @@ If you need spritesheets or animation exports, Aseprite’s built-in exporters a
 
 Tested with a single canvas containing multiple distinct assets, each marked with a named slice. For example, a slice named `Triangle_Outline` is exported as `Triangle_Outline.png` (one PNG per slice).
 
+![Example: slices exported as individual PNG files](docs/aseprite-slice-exporter-example.png)
+
+---
+
+## Feedback
+
+Found a bug or want to suggest an improvement? Please open an issue so I can track it and respond.
+
+- Report a bug [here](https://github.com/flampdiaz/aseprite-slice-exporter/issues/new?template=bug_report.yml)
+- Request a feature [here](https://github.com/flampdiaz/aseprite-slice-exporter/issues/new?template=feature_request.yml)
+
 ---
 
 ## License

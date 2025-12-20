@@ -1,0 +1,48 @@
+name: Feature request
+description: Suggest an improvement or new feature
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for the suggestion! Please describe what you want to improve and why."
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: "I want to..., but currently..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      placeholder: "It would be great if the extension could..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: "Any workaround or alternative approach you tried?"
+    validations:
+      required: false
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Example use case
+      placeholder: "Example: exporting 100 UI icons named with slices for a game engine pipeline..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: attachments
+    attributes:
+      label: References / mockups / screenshots
+      description: "Attach images or link references if helpful."
+    validations:
+      required: false

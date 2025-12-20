@@ -74,6 +74,8 @@ jobs:
             --exclude='.git' \
             --exclude='.gitignore' \
             --exclude='.gitattributes' \
+            --exclude='docs' \
+            --exclude='doc' \
             ./ "$OUTDIR/$FOLDER_NAME"
 
           cd "$OUTDIR"
